@@ -1,4 +1,4 @@
-import { Sitting, Running, Jumping, Falling, Rolling } from './playerStates.js'
+import { Sitting, Running, Jumping, Falling, Rolling, Diving, Hit } from './playerStates.js'
 export class Player {
 	constructor(game) {
 		this.game = game
@@ -11,13 +11,21 @@ export class Player {
 		this.image = document.getElementById('player')
 		this.frameX = 0
 		this.frameY = 0
+		this.maxFrame
 		this.fps = 25
 		this.frameInterval = 1000 / this.fps
 		this.frameTimer = 0
 		this.speed = 0
-		this.maxSpeed = 6
-		this.jumpSpeed = 8
-		this.states = [new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), new Rolling(this.game)]
+		this.maxSpeed = 8
+		this.states = [
+			new Sitting(this.game),
+			new Running(this.game),
+			new Jumping(this.game),
+			new Falling(this.game),
+			new Rolling(this.game),
+			new Diving(this.game),
+			new Hit(this.game),
+		]
 	}
 	update(input, deltaTime) {
 		this.checkCollision()
@@ -28,12 +36,18 @@ export class Player {
 		if (input.includes('ArrowRight')) this.speed = this.maxSpeed
 		else if (input.includes('ArrowLeft')) this.speed = -this.maxSpeed
 		else this.speed = 0
+		// Limite Horizontal
 		if (this.x < 0) this.x = 0
 		if (this.x > this.game.width - this.width) this.x = this.game.width - this.width
 		//Movimiento Vertical
 		this.y += this.vy
-		if (!this.onGround()) this.vy += this.weight
-		else this.vy = 0
+		if (!this.onGround()) {
+			this.vy += this.weight
+		} else {
+			this.vy = 0
+		}
+		//Limite Vertical
+		if (this.y > this.game.height - this.height - this.game.groundMargin) this.y = this.game.height - this.height - this.game.groundMargin
 		//sprite animation
 		if (this.frameTimer > this.frameInterval) {
 			this.frameTimer = 0
@@ -70,9 +84,11 @@ export class Player {
 			if (enemy.x < this.x + this.width && enemy.x + enemy.width > this.x && enemy.y < this.y + this.height && enemy.y + enemy.height > this.y) {
 				//colision detectada
 				enemy.markedForDeletion = true
-				this.game.score++
-			} else {
-				//no hay colision
+				if (this.currentState === this.states[4] || this.currentState === this.states[5]) {
+					this.game.score++
+				} else {
+					this.setState(6, 0)
+				}
 			}
 		})
 	}
