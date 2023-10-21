@@ -3,27 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Juego Javascript</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Creepster&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" />
+  <title>Black Market</title>
 </head>
 <body>
-  <canvas id="canvas1"></canvas>
-  <img id="player" src="assets/player.png">
-  <img id="layer1" src="assets/layer-1.png">
-  <img id="layer2" src="assets/layer-2.png">
-  <img id="layer3" src="assets/layer-3.png">
-  <img id="layer4" src="assets/layer-4.png">
-  <img id="layer5" src="assets/layer-5.png">
-  <img id="enemy_fly" src="assets/enemy_fly.png" />
-  <img id="enemy_plant" src="assets/enemy_plant.png" />
-  <img id="enemy_spider_big" src="assets/enemy_spider_big.png" />
-  <img id="fire" src="assets/fire.png">
-  <img id="collisionAnimation" src="assets/boom.png">
-  <img id="lives" src="assets/heart.png">
-  
-  <script type="module" src="main.js"></script>
+  <div class="content">
+				<div class="glitch">
+					<div class="glitch-img"></div>
+					<div class="glitch-img"></div>
+					<div class="glitch-img"></div>
+					<div class="glitch-img"></div>
+					<div class="glitch-img"></div>
+				</div>
+				<h1 class="content-title neonText">
+          ブラックマーケットへようこそ
+        </h1>
+			</div>
+  <main class="d-flex justify-content-evenly">
+    <input type="text" name="" id="inputBuscar" placeholder="ウェブで検索する" >
+    <div class="text-end">
+      <ul class="list-group">
+      <li class="list-group-item active btn btnCategoria" data-categoria="Todos">Todos</li>
+      <li class="list-group-item btn btnCategoria" data-categoria="Bebidas">Bebidas</li>
+      <li class="list-group-item btn btnCategoria" data-categoria="Pastas">Pastas</li>
+      <li class="list-group-item btn btnCategoria" data-categoria="Donas">Donas</li>
+      <li class="list-group-item btn btnCategoria" data-categoria="FastFood">FastFood</li>
+      <li class="list-group-item btn btnCategoria" data-categoria="Armas">Armas</li>
+    </ul>
+    </div>
+    <div  class="text-center">
+      <div id="productos" class="d-flex justify-content-evenly">
+      </div>
+    </div>
+    <section>
+      <button class="btn align-bottom" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><img src="img/carrito.png">     <p>
+        ショッピングカート
+      </p> 
+      </button>
+      <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"     id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">あなたのカートには、<span id="cantidadProductos">0</span> アイテム</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p></d>
+        <div id="scroll">
+          <div id="carrito" >
+          </div>
+        </div>
+        <h2>
+        合計: $<span id="totalCarrito">0</span>
+        </h2>
+        <div class="text-center">
+          <button href='#' class="btnComprar">今すぐ購入</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="juego">
+    <div class="text-center" >
+      <button>
+        <a href="juego.html"><img src="img/logame.png"><p class="neonText">TOP SECRET</p></a>
+      </button>
+      
+    </div>
+  </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
 </body>
 </html>

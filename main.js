@@ -108,7 +108,11 @@ window.addEventListener('load', function () {
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 		game.update(deltaTime)
 		game.draw(ctx)
-		if (!game.gameOver) requestAnimationFrame(animate)
+		if (game.gameOver) {
+			restartButton.style.display = 'block'
+		} else {
+			requestAnimationFrame(animate)
+		}
 	}
 	animate(0)
 })
